@@ -40,4 +40,6 @@ class PhysicsEngine(arcade.PymunkPhysicsEngine):
                 self.player.change_angle -= self.player.turn_speed
             if movement[3] and not movement[2]:
                 self.player.change_angle += self.player.turn_speed
+            if not movement[2] and not movement[3]:
+                self.player.change_angle = 0
         super().step()
