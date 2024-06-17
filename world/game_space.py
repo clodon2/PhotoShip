@@ -1,6 +1,7 @@
 import random
 
 import arcade
+from pyglet.graphics import Batch, Group
 from menus import dead_menu
 from menus.win_menu import WinMenu
 from world.player import Player
@@ -29,6 +30,7 @@ class GameLevel(arcade.View):
     def __init__(self):
         super().__init__()
         self.state = "game"
+        self.timer = False
 
         self.player = None
         self.scene = None
@@ -40,6 +42,7 @@ class GameLevel(arcade.View):
 
         self.ui = []
         self.star_background: Optional[ParallaxStarBackground] = None
+        self.waypoint_batch: Optional[Batch]
 
         self.move_up = False
         self.move_down = False
@@ -69,6 +72,8 @@ class GameLevel(arcade.View):
         self.timer = 0
         self.player = Player()
 
+        self.waypoint_batch = Batch()
+
         self.scene = arcade.Scene()
         self.scene.add_sprite_list("waypoints")
         self.scene.add_sprite_list("player")
@@ -92,16 +97,18 @@ class GameLevel(arcade.View):
     def generate_ui(self):
         bar_list = arcade.SpriteList()
         self.player.light_bar = IndicatorBar(self.player, bar_list,
-                                             position=(self.window.width - 140, self.window.height / (2)),
+                                             position=(self.window.width - 140, self.window.height / 2),
                                              full_color=arcade.color.Color(255, 255, 255, 125),
                                              width=30, height=200)
+
         self.heat_bar = arcade.Text(f"Heat: {self.player.heat}%",
-                                    self.window.width - 260, self.window.height / 5,
+                                    self.window.width - 260, self.window.height / 3,
                                     font_size=20, font_name="Kenney Future")
 
         self.parts_bar = arcade.Text(f"Parts: {self.player.parts}/4",
                                     self.window.width - 260, self.window.height / 8,
                                     font_size=20, font_name="Kenney Future")
+
         self.timer_text = arcade.Text(f"Time: {self.timer}",
                                     10, 10,
                                     font_size=20, font_name="Kenney Future")
@@ -134,7 +141,7 @@ class GameLevel(arcade.View):
             part = ShipPart(position, angle)
             self.scene.add_sprite("parts", part)
 
-            waypoint = Waypoint(position, part, camera=self.camera, player=self.player)
+            waypoint = Waypoint(position, part, camera=self.camera, player=self.player, batch=self.waypoint_batch)
             self.scene.add_sprite("waypoints", waypoint)
 
         for star in self.scene["objects"]:
@@ -146,13 +153,11 @@ class GameLevel(arcade.View):
         self.star_background.draw()
         self.emitters_handler.draw()
         self.scene.draw()
+        self.waypoint_batch.draw()
 
         self.minimap_camera.use()
         self.clear(color=self.minimap_camera.background_color)
         self.scene.draw()
-
-        for waypoint in self.scene["waypoints"]:
-            waypoint.distance_text.draw()
 
         self.ui_camera.use()
         arcade.draw_xywh_rectangle_outline(self.minimap_camera.viewport_left, self.minimap_camera.viewport_bottom,

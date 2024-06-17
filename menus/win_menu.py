@@ -24,10 +24,8 @@ class WinMenu(arcade.View):
         self.v_box.add(ui_text_label)
 
         # Create a text label
-        ui_text_label = arcade.gui.widgets.text.UITextArea(
+        ui_text_label = arcade.gui.widgets.text.UILabel(
             text=f"Time: {time}",
-            width=400 + int(7*len(str(time))),
-            height=100,
             font_size=50,
             font_name="Kenney Future",
         )
