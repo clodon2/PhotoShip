@@ -51,6 +51,7 @@ class MainMenu(arcade.View):
         self.window.show_view(game_start)
 
     def info_click(self, event):
+        """If info button is clicked, open a popup window"""
         message_box = arcade.gui.UIMessageBox(
             width=700,
             height=700,
@@ -65,10 +66,10 @@ class MainMenu(arcade.View):
 
         @message_box.event("on_action")
         def on_message_box_close(e: UIOnActionEvent):
-            # show open button and allow interaction again
+            # make info button visible when message box closed
             self.info_button.visible = True
 
-        # hide open button and prevent interaction
+        # hide info button when message box open (prevent multiple windows)
         self.info_button.visible = False
 
         self.ui.add(message_box)

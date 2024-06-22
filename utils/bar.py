@@ -4,6 +4,9 @@ from world.player import Player
 from typing import Tuple
 
 
+# Modified bar from sprite_health.py
+
+
 class IndicatorBar:
     """
     Represents a bar which can display information about a sprite.
@@ -171,3 +174,7 @@ class IndicatorBar:
             self._scale = value
             self.background_box.scale = value
             self.full_box.scale = value
+
+    def draw(self):
+        """ Draws the bar """
+        self.sprite_list.draw()

@@ -7,6 +7,7 @@ class WinMenu(arcade.View):
     def __init__(self, time=None):
         if time:
             time = round(time, 2)
+
         super().__init__()
         self.ui = arcade.gui.UIManager()
 

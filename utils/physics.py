@@ -5,6 +5,7 @@ DAMPING = .5
 
 
 class PhysicsEngine(arcade.PymunkPhysicsEngine):
+    """Physics Engine for space, player movement applied here"""
     def __init__(self, scene: arcade.Scene, gravity=(0, 0), damping=DAMPING, maximum_incline_on_ground=.708):
         super().__init__(gravity, damping, maximum_incline_on_ground)
 

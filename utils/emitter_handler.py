@@ -2,6 +2,7 @@ import arcade
 
 
 class EmitterHandler:
+    """Handles multiple emitters, sort of like a list for them"""
     def __init__(self):
         self.emitters = []
 

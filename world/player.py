@@ -2,6 +2,7 @@ import arcade
 from math import degrees
 
 
+# Physic options for player
 MASS = 1
 FRICTION = 100
 ELASTICTY = None
@@ -44,22 +45,34 @@ class Player(arcade.Sprite):
         self.texture = arcade.load_texture("./resources/playerShip1_blue.png")
 
     def on_update(self, delta_time: float = 1 / 60) -> None:
-        print(self.light, self.light_bar.fullness)
+        # prevent ship from spinning super fast
         if abs(self.change_angle) > MAX_TURN_SPEED:
             self.change_angle = MAX_TURN_SPEED * (self.change_angle / abs(self.change_angle))
 
+        # match sprite angle to physics angle
         self.pymunk_body.body.angle += self.change_angle
 
+        # prevent light bar from overfilling
         if self.light > 100:
             self.light = 100
 
     def add_light(self, amount):
+        """
+        Add/subtract light to light bar
+        :param amount: how much to add/subtract
+        :return:
+        """
+        # if light change creates overfill, set amount to 100
         if (self.light + amount) > 100:
             self.light = 100
             return False
+
+        # if light change creates negative amount, set amount to 0
         elif (self.light + amount) < 0:
             self.light = 0
             return False
+
+        # otherwise, change light based on amount
         else:
             self.light += amount
             return True

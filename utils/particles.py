@@ -5,6 +5,7 @@ from math import sin, cos, atan2
 from random import uniform, choice
 
 
+# particles for light boost
 RED_PART_TEXTURE = arcade.make_circle_texture(30, arcade.color.RED)
 ORANGE_PART_TEXTURE = arcade.make_circle_texture(30, arcade.color.ORANGE)
 YELLOW_PART_TEXTURE = arcade.make_circle_texture(30, arcade.color.YELLOW)
@@ -12,6 +13,7 @@ GRAY_PART_TEXTURE = arcade.make_circle_texture(30, arcade.color.GRAY)
 
 
 class BoostParticle(arcade.particles.FadeParticle):
+    """Particle for ship booster"""
     def __init__(self, part_dir):
         part_img = choice([RED_PART_TEXTURE, ORANGE_PART_TEXTURE, YELLOW_PART_TEXTURE, GRAY_PART_TEXTURE])
         texture = part_img
@@ -20,12 +22,14 @@ class BoostParticle(arcade.particles.FadeParticle):
 
 
 class BoostEmitter(arcade.particles.Emitter):
+    """Emitter for ship booster"""
     def __init__(self, center_xy, part_dir):
         super().__init__(center_xy=center_xy, emit_controller=arcade.particles.EmitBurst(3),
                          particle_factory=lambda emitter: BoostParticle(part_dir))
 
 
 def boost_emit(center_xy, player_angle):
+    """Create a emitter for ship booster"""
     particle_move_x = sin(player_angle) + uniform(-.5, .5)
     particle_move_y = -cos(player_angle) + uniform(-.5, 5)
     e = BoostEmitter(center_xy, (particle_move_x, particle_move_y))
@@ -33,6 +37,7 @@ def boost_emit(center_xy, player_angle):
 
 
 class SunParticle(arcade.particles.FadeParticle):
+    """Particle for taking light from sun"""
     def __init__(self, sun_color, part_dir, player=None):
         part_img = arcade.make_soft_circle_texture(40, sun_color)
         self.change_xy = part_dir
@@ -48,6 +53,7 @@ class SunParticle(arcade.particles.FadeParticle):
 
 
 class SunEmitter(arcade.particles.Emitter):
+    """Emitter for taking light from sun"""
     def __init__(self, center_xy, sun_color, part_dir, player):
         super().__init__(center_xy=center_xy,
                          emit_controller=arcade.particles.EmitBurst(choice([0, 1])),
@@ -56,12 +62,14 @@ class SunEmitter(arcade.particles.Emitter):
 
 
 def sun_emit(center_xy, sun_color, player: world.player.Player, sun: world.planet_system.Star):
+    """Create emitter for light from sun"""
     part_dir = get_particle_dir(player, sun)
     e = SunEmitter(center_xy, sun_color, part_dir, player)
     return sun_emit.__doc__, e
 
 
 def get_particle_dir(player, sun):
+    """Get force to apply to particle to fly from sun to player"""
     x_distance = player.center_x - sun.center_x
     y_distance = player.center_y - sun.center_y
     angle = atan2(y_distance, x_distance)
