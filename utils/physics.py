@@ -20,8 +20,7 @@ class PhysicsEngine(arcade.PymunkPhysicsEngine):
                              moment_of_inertia=self.player.moment_of_inertia,
                              body_type=self.player.body_type,
                              damping=self.player.damping,
-                             collision_type=self.player.collision_type,
-                             max_velocity=self.player.max_velocity)
+                             collision_type=self.player.collision_type)
 
     def step(self,
              delta_time: float = 1 / 60.0,

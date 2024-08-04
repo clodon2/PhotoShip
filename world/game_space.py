@@ -183,19 +183,17 @@ class GameLevel(arcade.View):
 
         # draw with ui camera
         self.ui_camera.use()
-        arcade.draw_xywh_rectangle_outline(self.minimap_camera.viewport_left, self.minimap_camera.viewport_bottom,
+        arcade.draw_lbwh_rectangle_outline(self.minimap_camera.viewport_left, self.minimap_camera.viewport_bottom,
                                            self.minimap_camera.viewport_width, self.minimap_camera.viewport_height,
                                            arcade.color.WHITE)
 
-        # prevents transparency issues
-        with self.window.ctx.pyglet_rendering():
-            self.ui_batch.draw()
+        self.ui_batch.draw()
         self.player.light_bar.draw()
 
         # draw red overlay if player overheating
         if self.player.heat >= 70:
             red_heat_a = round(((self.player.heat - 70) / 30) * 120)
-            arcade.draw_xywh_rectangle_filled(0, 0,
+            arcade.draw_lbwh_rectangle_filled(0, 0,
                                               self.window.width, self.window.height,
                                               arcade.color.Color(255, 0, 0, red_heat_a))
         # draw blue overlay if player freezing
@@ -206,7 +204,7 @@ class GameLevel(arcade.View):
                 blue_heat_a = round(((30 / self.player.heat) / 30) * 240)
                 if blue_heat_a > 240:
                     blue_heat_a = 240
-                arcade.draw_xywh_rectangle_filled(0, 0,
+                arcade.draw_lbwh_rectangle_filled(0, 0,
                                                   self.window.width, self.window.height,
                                                   arcade.color.Color(0, 0, 255, blue_heat_a))
 
@@ -215,7 +213,7 @@ class GameLevel(arcade.View):
         self.timer += delta_time
         # if in game, run that state
         if self.state == "game":
-            self.game_state()
+            self.game_state(delta_time)
 
         # if player dies, run death screen
         if self.state == "dead":
@@ -227,7 +225,7 @@ class GameLevel(arcade.View):
             win_menu = WinMenu(self.timer)
             self.window.show_view(win_menu)
 
-    def game_state(self):
+    def game_state(self, delta_time):
         """All main game operations here"""
         self.process_keychange()
         # update physics engine
@@ -238,7 +236,7 @@ class GameLevel(arcade.View):
             force = get_grav_force(self.player, gravity)
             self.physics_engine.apply_force(self.player, force)
             # specific to a star, needs changing probably
-            self.player.heat += .2
+            self.player.heat += .0002
             if self.player.add_light(.5):
                 color = gravity.parent.color
                 emit_label, sun_emitter = sun_emit(gravity.position, color, self.player, gravity.parent)
@@ -268,7 +266,7 @@ class GameLevel(arcade.View):
             self.state = "win"
 
         # update scene objects
-        self.scene.on_update()
+        self.scene.update(delta_time=120)
         # update emitters
         self.emitters_handler.on_update()
 

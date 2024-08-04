@@ -11,10 +11,10 @@ class MainMenu(arcade.View):
         self.ui = arcade.gui.UIManager()
 
         # Create a vertical BoxGroup to align buttons
-        self.v_box = arcade.gui.widgets.layout.UIBoxLayout(space_between=80)
+        self.v_box = arcade.gui.UIBoxLayout(space_between=80)
 
         # Create a text label
-        ui_text_label = arcade.gui.widgets.text.UITextArea(
+        ui_text_label = arcade.gui.UITextArea(
             text="PhotoShip",
             width=450,
             height=100,
@@ -25,8 +25,7 @@ class MainMenu(arcade.View):
 
         # start button
         texture = arcade.load_texture(":resources:onscreen_controls/flat_dark/play.png")
-        ui_texture_button = arcade.gui.widgets.buttons.UITextureButton(texture=texture,
-                                                                       scale=2)
+        ui_texture_button = arcade.gui.UITextureButton(texture=texture, scale=2)
 
         # start button click
         ui_texture_button.on_click = self.on_click_start
@@ -34,7 +33,7 @@ class MainMenu(arcade.View):
         self.v_box.add(ui_texture_button)
 
         # info button
-        self.info_button = arcade.gui.widgets.buttons.UIFlatButton(text="Info")
+        self.info_button = arcade.gui.UIFlatButton(text="Info")
 
         self.info_button.on_click = self.info_click
 
@@ -42,7 +41,7 @@ class MainMenu(arcade.View):
 
         # Create a widget to hold the v_box widget, that will center the buttons
         self.ui.add(
-            arcade.gui.widgets.layout.UIAnchorLayout(children=[self.v_box])
+            arcade.gui.UIAnchorLayout(children=[self.v_box])
         )
 
     def on_click_start(self, event):

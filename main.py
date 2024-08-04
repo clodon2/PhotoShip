@@ -6,6 +6,9 @@ SCREEN_WIDTH = 1920
 SCREEN_HEIGHT = 1000
 
 
+arcade.resources.load_system_fonts()
+
+
 def main():
     window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
     start_view = MainMenu()

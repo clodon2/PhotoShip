@@ -10,15 +10,15 @@ HEIGHT = 200
 PROJECTION_WIDTH = 500
 PROJECTION_HEIGHT = 500
 
-VIEWPORT = (SCREEN_WIDTH - WIDTH - 50,
-            SCREEN_HEIGHT - HEIGHT - 50,
-            WIDTH,
-            HEIGHT)
+VIEWPORT = arcade.LBWH(left=SCREEN_WIDTH - WIDTH - 50,
+                       bottom=SCREEN_HEIGHT - HEIGHT - 50,
+                       width=WIDTH,
+                       height=HEIGHT)
 
-PROJECTION = (-PROJECTION_WIDTH / 2,
-              PROJECTION_WIDTH / 2,
-              -PROJECTION_HEIGHT / 2,
-              PROJECTION_HEIGHT / 2)
+PROJECTION = arcade.LBWH(left=-PROJECTION_WIDTH / 2,
+                         bottom=PROJECTION_WIDTH / 2,
+                         width=-PROJECTION_HEIGHT / 2,
+                         height=PROJECTION_HEIGHT / 2)
 
 
 class MiniMapCamera(arcade.camera.Camera2D):

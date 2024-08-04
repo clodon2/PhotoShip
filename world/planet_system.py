@@ -6,7 +6,7 @@ from world.waypoints import Waypoint
 
 class Star(arcade.SpriteCircle):
     """A star with gravity"""
-    def __init__(self, position=(0, 0)):
+    def __init__(self, center_x=0, center_y=0):
         # determine star size
         radius = random.randrange(50, 85)
 
@@ -25,7 +25,9 @@ class Star(arcade.SpriteCircle):
 
         super().__init__(radius, color)
 
-        self.position = position
+        self.center_x = center_x
+        self.center_y = center_y
+        self.update()
         # star's gravity object
         self.grav_radius = GravityRadius(radius*10, (255, 255, 255, 100), self)
 
@@ -74,5 +76,6 @@ def world_star_gen(map_size,
     for i in range(star_count):
         x = random.randrange(-map_size[0] / 2, map_size[0] / 2)
         y = random.randrange(-map_size[1] / 2, map_size[1] / 2)
-        star = Star(position=(x, y))
+        star = Star(center_x=x, center_y=y)
+        star.position = (500, 0)
         sprite_list.append(star)
