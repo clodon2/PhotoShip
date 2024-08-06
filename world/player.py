@@ -14,7 +14,7 @@ MAX_VELOCITY = 800
 
 TURN_SPEED = .005
 MAX_TURN_SPEED = .1
-SPEED = 2
+SPEED = 600
 
 SPAWN_LOCATION = 0, 0
 
@@ -44,7 +44,7 @@ class Player(arcade.Sprite):
 
         self.texture = arcade.load_texture("./resources/playerShip1_blue.png")
 
-    def on_update(self, delta_time: float = 1 / 60) -> None:
+    def update(self, delta_time: float = 1 / 60, *args, **kwargs) -> None:
         # prevent ship from spinning super fast
         if abs(self.change_angle) > MAX_TURN_SPEED:
             self.change_angle = MAX_TURN_SPEED * (self.change_angle / abs(self.change_angle))

@@ -48,7 +48,7 @@ class SunParticle(arcade.particles.FadeParticle):
                          start_alpha=200)
         self.player = player
 
-    def update(self):
+    def update(self, delta_time: float = 1/60) -> None:
         super().update()
 
 

@@ -236,7 +236,7 @@ class GameLevel(arcade.View):
             force = get_grav_force(self.player, gravity)
             self.physics_engine.apply_force(self.player, force)
             # specific to a star, needs changing probably
-            self.player.heat += .0002
+            self.player.heat += .2
             if self.player.add_light(.5):
                 color = gravity.parent.color
                 emit_label, sun_emitter = sun_emit(gravity.position, color, self.player, gravity.parent)
@@ -266,9 +266,9 @@ class GameLevel(arcade.View):
             self.state = "win"
 
         # update scene objects
-        self.scene.update(delta_time=120)
+        self.scene.update(delta_time)
         # update emitters
-        self.emitters_handler.on_update()
+        self.emitters_handler.update(delta_time)
 
         # update camera positions with player movement
         self.camera.position = self.player.position

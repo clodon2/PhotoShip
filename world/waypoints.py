@@ -25,7 +25,8 @@ class Waypoint(arcade.SpriteSolidColor):
             self.distance_text = arcade.Text(f"{dist}", self.center_x, self.center_y,
                                              font_size=15, font_name="Kenney Future", batch=batch)
 
-    def on_update(self, delta_time: float = 1 / 2) -> None:
+    def update(self, delta_time: float = 1 / 2, *args, **kwargs) -> None:
+        super().update(delta_time)
         # set position to mirror parent
         self.position = self.parent.position
         # if camera is given, keep waypoint on screen

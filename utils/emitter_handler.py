@@ -13,6 +13,6 @@ class EmitterHandler:
         for emitter in self.emitters:
             emitter.draw()
 
-    def on_update(self):
+    def update(self, delta_time):
         for emitter in self.emitters:
             emitter.update()

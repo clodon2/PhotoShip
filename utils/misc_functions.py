@@ -25,7 +25,7 @@ def get_gravity(object_one, object_two):
     if dist == 0:
         return 0
     gravity = (object_one.width * object_two.width) / dist
-    return gravity / 5
+    return gravity
 
 
 def get_grav_force(object_one: arcade.Sprite, object_two: arcade.Sprite):

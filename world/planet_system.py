@@ -6,7 +6,7 @@ from world.waypoints import Waypoint
 
 class Star(arcade.SpriteCircle):
     """A star with gravity"""
-    def __init__(self, center_x=0, center_y=0):
+    def __init__(self, position=(0, 0)):
         # determine star size
         radius = random.randrange(50, 85)
 
@@ -25,13 +25,13 @@ class Star(arcade.SpriteCircle):
 
         super().__init__(radius, color)
 
-        self.center_x = center_x
-        self.center_y = center_y
+        self.position = position
         self.update()
         # star's gravity object
         self.grav_radius = GravityRadius(radius*10, (255, 255, 255, 100), self)
 
-    def on_update(self, delta_time: float = 1 / 2) -> None:
+    def update(self, delta_time: float = 1 / 2, *args, **kwargs) -> None:
+        super().update(delta_time)
         # kill if too small
         if self.width < 1:
             self.kill()
@@ -49,9 +49,9 @@ class GravityRadius(arcade.SpriteCircle):
         # parent object to attach to
         self.parent = parent
 
-    def on_update(self, delta_time: float = 1 / 10) -> None:
+    def update(self, delta_time: float = 1 / 10, *args, **kwargs) -> None:
         """Mirror parent position and kill state"""
-        super().on_update(delta_time)
+        super().update(delta_time)
         self.position = self.parent.position
 
         if not self.parent.visible:
@@ -76,6 +76,5 @@ def world_star_gen(map_size,
     for i in range(star_count):
         x = random.randrange(-map_size[0] / 2, map_size[0] / 2)
         y = random.randrange(-map_size[1] / 2, map_size[1] / 2)
-        star = Star(center_x=x, center_y=y)
-        star.position = (500, 0)
+        star = Star((x, y))
         sprite_list.append(star)
