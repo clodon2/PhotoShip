@@ -1,3 +1,10 @@
+"""
+Corey Verkouteren
+xxx-xxx
+Game about survivng in space with light for a game jam
+"""
+
+
 import arcade
 from menus.main_menu import MainMenu
 
