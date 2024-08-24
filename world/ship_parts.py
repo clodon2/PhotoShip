@@ -1,3 +1,6 @@
+"""
+class for shi part objective
+"""
 import arcade
 
 

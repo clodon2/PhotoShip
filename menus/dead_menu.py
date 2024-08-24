@@ -1,3 +1,6 @@
+"""
+menu for when the player loses
+"""
 import arcade
 import arcade.gui
 from arcade.gui.widgets import layout, text, buttons

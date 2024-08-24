@@ -1,3 +1,6 @@
+"""
+main game loop here
+"""
 import random
 
 import arcade

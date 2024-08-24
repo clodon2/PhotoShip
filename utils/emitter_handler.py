@@ -1,3 +1,6 @@
+"""
+class that handles all of our emitter objects
+"""
 import arcade
 
 

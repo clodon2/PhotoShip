@@ -1,3 +1,6 @@
+"""
+class for a custom indicator bar that is used to show light %
+"""
 import arcade
 from arcade.types import Color
 from world.player import Player

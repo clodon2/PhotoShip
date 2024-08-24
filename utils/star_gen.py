@@ -1,3 +1,6 @@
+"""
+fancy background class and constructor to mimic space
+"""
 import arcade
 import random
 from utils.misc_functions import probability

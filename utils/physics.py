@@ -1,3 +1,6 @@
+"""
+pymunk physics class that should handle all/most collisions
+"""
 import arcade
 
 

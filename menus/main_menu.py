@@ -1,3 +1,6 @@
+"""
+menu used before the start of the game
+"""
 import arcade
 import arcade.gui
 from arcade.gui import UIOnActionEvent

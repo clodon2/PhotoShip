@@ -1,3 +1,6 @@
+"""
+specific camera setup for the minimap, has some bugs
+"""
 import arcade
 
 

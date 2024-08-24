@@ -1,3 +1,6 @@
+"""
+menu used when the player wins
+"""
 import arcade
 import menus.main_menu
 

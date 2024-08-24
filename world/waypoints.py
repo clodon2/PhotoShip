@@ -1,3 +1,6 @@
+"""
+class for waypoints that appear on screen, DOESN'T WORK WITH MINIMAP
+"""
 import arcade
 from typing import Optional
 

@@ -1,3 +1,6 @@
+"""
+player class and options
+"""
 import arcade
 from math import degrees
 
@@ -45,6 +48,13 @@ class Player(arcade.Sprite):
         self.texture = arcade.load_texture("./resources/playerShip1_blue.png")
 
     def update(self, delta_time: float = 1 / 60, *args, **kwargs) -> None:
+        """
+        update the player
+        :param delta_time: update this # of times per second
+        :param args:
+        :param kwargs:
+        :return:
+        """
         # prevent ship from spinning super fast
         if abs(self.change_angle) > MAX_TURN_SPEED:
             self.change_angle = MAX_TURN_SPEED * (self.change_angle / abs(self.change_angle))

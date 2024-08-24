@@ -1,3 +1,6 @@
+"""
+various utility functions that are used throughout the game
+"""
 import arcade
 import random
 from math import sin, cos, pi, atan2

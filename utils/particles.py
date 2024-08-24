@@ -1,3 +1,6 @@
+"""
+currently houses all particle and emitter class types and emitter functions
+"""
 import arcade
 from arcade import particles
 import world

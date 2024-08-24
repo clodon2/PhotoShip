@@ -1,3 +1,6 @@
+"""
+code for stellar objects like stars
+"""
 import arcade
 import random
 from utils.misc_functions import probability
@@ -7,6 +10,10 @@ from world.waypoints import Waypoint
 class Star(arcade.SpriteCircle):
     """A star with gravity"""
     def __init__(self, position=(0, 0)):
+        """
+        a star object with gravity that fuels and heats the ship
+        :param position: where to spawn in world
+        """
         # determine star size
         radius = random.randrange(50, 85)
 
